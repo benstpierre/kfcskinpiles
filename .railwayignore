@@ -1,0 +1,9 @@
+.git
+.env
+.env.*
+.codex
+.local
+node_modules
+dist
+output
+test-results

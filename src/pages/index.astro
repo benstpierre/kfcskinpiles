@@ -1,0 +1,58 @@
+---
+import { createReader } from '@keystatic/core/reader';
+import config from '../../keystatic.config';
+import '../styles/site.css';
+const home = await createReader(process.cwd(), config).singletons.home.readOrThrow();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="KFC Skin Piles. All skin. No filler. An unofficial, deeply crispy comedy concept." />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>KFC Skin Piles — All skin. No filler.</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header">
+      <a class="wordmark" href="#" aria-label="Skin Piles home"><span>KFC</span> SKIN PILES<span class="star" aria-hidden="true">✳</span></a>
+      <nav aria-label="Main navigation"><a href="#buckets">The piles</a><a href="#questions">Skin questions</a></nav>
+      <span class="header-note">THE BEST BIT. BY THE BUCKET.</span>
+    </header>
+    <main id="main">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span aria-hidden="true">★</span> {home.eyebrow}</p>
+          <h1>{home.headline}</h1>
+          <p class="intro">{home.intro}</p>
+          <a class="button" href="#buckets">Meet your new bad idea <span aria-hidden="true">↗</span></a>
+          <p class="aside">11 herbs & spices. Zero small talk.</p>
+        </div>
+        <div class="hero-art">
+          <img src="/images/skin-pile.png" width="1254" height="1254" alt="A red and cream Skin Piles bucket overflowing with golden, crispy fried chicken skin" fetchpriority="high" />
+          <div class="seal" aria-label="100 percent the good bit"><span>100%</span>THE GOOD BIT</div>
+          <p class="image-caption">ACTUAL SIZE DEPENDS ON YOUR AMBITION.</p>
+        </div>
+      </section>
+      <div class="ticker" aria-label="No bones, no compromises, just the crispy bit"><span>NO BONES.</span><b aria-hidden="true">✳</b><span>NO COMPROMISES.</span><b aria-hidden="true">✳</b><span>JUST THE CRISPY BIT.</span><b aria-hidden="true">✳</b></div>
+      <section class="manifesto section">
+        <p class="eyebrow">A bold step sideways</p>
+        <h2>WE CUT OUT<br />THE MIDDLE CHICKEN.</h2>
+        <p>For years, you've peeled it off first. Saved it for last. Stolen it from someone else's plate. We noticed. Then we got a bucket.</p>
+      </section>
+      <section class="section buckets" id="buckets">
+        <div class="section-heading"><div><p class="eyebrow">Find your level of commitment</p><h2>PICK YOUR PILE.</h2></div><p>Three imaginary sizes.<br />One very real craving.</p></div>
+        <div class="bucket-grid">{home.buckets.map((bucket, i) => <article class:list={['bucket-card', { featured: i === 1 }]}>
+          <span class="bucket-number">0{i + 1} / {i === 1 ? 'THE CROWD PLEASER' : i === 2 ? 'AN EVENT' : 'JUST FOR YOU'}</span>
+          <div class="mini-bucket" style={`--scale: ${0.7 + i * 0.15}`} aria-hidden="true"><span>SKIN<br />PILES</span></div>
+          <p class="tagline">{bucket.tagline}</p><h3>{bucket.name}</h3><p>{bucket.description}</p>
+        </article>)}</div>
+      </section>
+      <section class="quote section"><span aria-hidden="true">“</span><blockquote>Finally. A bucket that understands me.</blockquote><p>— EVERYONE WHO EATS THE SKIN FIRST</p></section>
+      <section class="section faq" id="questions"><div><p class="eyebrow">Let's get under the skin</p><h2>GOOD <br />SKIN QUESTIONS.</h2></div><div class="questions">{home.questions.map(q => <details><summary>{q.question}<span aria-hidden="true">+</span></summary><p>{q.answer}</p></details>)}</div></section>
+      <section class="closing"><p class="eyebrow">The future is crispy.</p><h2>GET SOME SKIN<br />IN THE GAME.</h2><a href="#buckets" class="button light">Reconsider the bucket <span aria-hidden="true">↑</span></a></section>
+    </main>
+    <footer><div class="wordmark">KFC SKIN PILES ✳</div><p>Unofficial parody. Not affiliated with KFC. No actual skin for sale.</p><form action="/logout" method="post"><button class="logout">Leave the skin club ↗</button></form></footer>
+  </body>
+</html>
