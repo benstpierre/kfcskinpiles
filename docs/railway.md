@@ -1,5 +1,10 @@
 # Railway runs the site
 
+The live demo is [Skin Piles](https://web-production-939f8.up.railway.app), in the dedicated
+`kfcskinpiles` project, `web` service, `production` environment. The initial release used
+source commit `1db8377` and passed live HTTPS browser validation on 2026-09-08. It was
+uploaded with the CLI; GitHub autodeploys and PR previews are not enabled.
+
 Railway builds the root `Dockerfile` and starts `node server/index.mjs`. Astro creates
 the page during the build; Fastify serves it behind the password gate. The production
 image contains runtime dependencies and built files, with no CMS editing API or source
@@ -20,8 +25,8 @@ credentials. The container runs as an unprivileged user and honors Railway's `PO
 6. Verify `/health` returns `{"status":"ok"}`, the homepage opens the password screen,
    the selected password opens the content, and logout closes the door again.
 
-The domain, service creation, and `railway up` are account mutations. These are onboarding
-instructions, not actions already performed by this starter's author.
+These are onboarding instructions for another copy. The demo project, service, domain,
+and deployment were created after the owner's explicit deployment authorization.
 
 | Variable | Set it to |
 | --- | --- |
@@ -68,9 +73,9 @@ commands in the Actions workflow.
 
 ## Local production-recipe check
 
-The application build and production server behavior are tested locally. Docker image
-execution is pending a running Docker daemon; the current implementation environment
-did not have one. On a Docker-enabled machine:
+Railway successfully built and ran the Docker image, including the Node 22 Astro build.
+Live HTTPS login and cookies were tested through Railway's proxy. The local implementation
+host has no running Docker daemon. To repeat the container build on another machine:
 
 ```sh
 docker build -t skin-piles .
@@ -94,3 +99,8 @@ Sources checked 2026-09-08: [Dockerfile builds](https://docs.railway.com/builds/
 [CLI uploads](https://docs.railway.com/cli),
 [Wait for CI](https://docs.railway.com/deployments/github-autodeploys), and
 [Railway environments and PR domains](https://docs.railway.com/environments).
+
+Maintenance note: Railway CLI 5.49.6 now reports that `railway.json` remains supported
+until 2026-12-01, after which projects should use `.railway/railway.ts`. The supplied
+configuration was accepted for this deployment; migrate it before that cutoff using
+Railway's `railway config migrate` workflow.

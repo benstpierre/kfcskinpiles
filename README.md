@@ -7,6 +7,11 @@ payments, customer accounts, analytics, or database.
 This is also a small playground for someone coming from WordPress: edit the copy in a
 browser, preview it on your computer, then publish a built version to Railway.
 
+**Live demo:** [Open Skin Piles](https://web-production-939f8.up.railway.app), deployed
+to the dedicated `kfcskinpiles` Railway project on 2026-09-08. The demo uses the
+`oops-all-skin` password. HTTPS login, protected assets, logout, and desktop/mobile
+layouts were verified in a real headless browser. See [validation notes](docs/validation.md).
+
 ## See the site in three commands
 
 Install **Node.js 22.12+** (Node 22 LTS recommended), then open a terminal in this folder:
@@ -85,7 +90,8 @@ that page and its stylesheet. Make one change at a time and preview it.
 The supplied `Dockerfile` builds Astro and runs a small Fastify server on Railway's
 injected `PORT`, listening on `0.0.0.0`. Railway runs **one service**, with **one replica**.
 It does not need a volume or database. You need your own Railway account and must review
-its current plan/costs before deploying. Nothing has been provisioned or deployed for you.
+its current plan/costs before deploying your own copy. The live demo above is already
+deployed; these instructions also explain how to create your own independent copy.
 
 Production requires `SITE_PASSWORD` (12+ characters) and the exact HTTPS `APP_ORIGIN`.
 The demo password is public in this README; choose your own funny passphrase before
